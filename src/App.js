@@ -4,6 +4,7 @@ import './App.css';
 import About from './components/About/index';
 import Nav from './components/Nav/index';
 import Gallery from './components/Gallery';
+import ContactForm from './components/Contact';
 
 function App() {
       const categories = [ //why did we have to initialize this with use state? instead of just declaring an array?
@@ -33,15 +34,25 @@ function App() {
       //   },
       // ]);
       const [currentCategory, setCurrentCategory] = useState(categories[0]);
+      const [contactSelected, setContactSelected] = useState(false);
   return (
     <div>
       <Nav
       categories={categories}
       setCurrentCategory={setCurrentCategory}
-      currentCategory={currentCategory}></Nav>
+      currentCategory={currentCategory}
+      contactSelected={contactSelected}
+      setContactSelected={setContactSelected}>
+      </Nav>
       <main>
-        <Gallery currentCategory={currentCategory}></Gallery>
-        <About></About>
+      {!contactSelected ? (
+        <>
+          <Gallery currentCategory={currentCategory}></Gallery>
+          <About></About>
+        </>
+      ) : (
+          <ContactForm></ContactForm>
+        )}
       </main>
     </div>
   );
